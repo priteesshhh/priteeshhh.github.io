@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Priteesh Karra — Portfolio</title>
+  <meta name="description" content="Priteesh Karra — AI Researcher · CS Undergrad @ University of North Texas. Open to AI/LLM/RAG/Applied Research/ML Infra internships (Summer 2026)." />
+  <style>
+    :root{
+      --bg:#060a18;--surface:#0c1226;--card:#121a2ea6;--ink:#eaf0ff;--muted:#9fb0d3;--brand:#8b7cff;--accent:#22d3ee;--line:#1f2b49;--radius:22px;--shadow:0 18px 60px rgba(0,0,0,.45)
+    }
+    :root.light{--bg:#f6f9ff;--surface:#ffffff;--card:rgba(255,255,255,.78);--ink:#0a1326;--muted:#4b5878;--brand:#5b4bff;--accent:#0ea5e9;--line:#dfe7fb;--shadow:0 12px 34px rgba(0,0,0,.10)}
+    *,*:before,*:after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;overflow-x:hidden}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1200px;margin:0 auto;padding:24px}
+
+    /* --- Professional video background --- */
+    .bg-video-wrap{position:fixed;inset:0;z-index:-2;overflow:hidden;background:var(--bg)}
+    .bg-video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translate(-50%,-50%);filter:contrast(1.02) saturate(0.9) brightness(0.55)}
+    .bg-overlay{position:absolute;inset:0;background:radial-gradient(900px 600px at 80% -10%, rgba(34,211,238,.12), transparent 60%),
+                                radial-gradient(900px 600px at -10% -10%, rgba(139,124,255,.10), transparent 60%)}
+
+    /* Header */
+    header{position:sticky;top:0;z-index:80;background:color-mix(in oklab, var(--bg) 78%, transparent);backdrop-filter:saturate(1.2) blur(12px);border-bottom:1px solid var(--line)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .dot{width:12px;height:12px;border-radius:999px;background:conic-gradient(from 0deg,var(--brand),var(--accent));box-shadow:0 0 18px var(--accent)}
+    .nav-right{display:flex;align-items:center;gap:18px}
+    .nav-links a{color:var(--muted);font-size:14px;padding:12px 8px;border-bottom:2px solid transparent}
+    .nav-links a.active{color:var(--ink);border-color:var(--brand)}
+    .icon-btn{width:40px;height:40px;border-radius:999px;display:grid;place-items:center;border:1px solid var(--line);background:color-mix(in oklab, var(--surface) 80%, transparent);cursor:pointer}
+
+    /* Buttons & cards */
+    .btn{display:inline-grid;place-items:center;padding:12px 18px;border-radius:14px;font-weight:800;color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .06s ease}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{background:linear-gradient(180deg,color-mix(in oklab, var(--brand) 100%, #fff 8%), color-mix(in oklab, var(--brand) 92%, #000 10%))}
+    .btn.accent{background:linear-gradient(180deg,color-mix(in oklab, var(--accent) 100%, #fff 6%), color-mix(in oklab, var(--accent) 92%, #000 8%))}
+    .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+    .btn.icon{display:inline-flex;align-items:center;gap:10px}
+    .btn.icon .ico{width:18px;height:18px;fill:currentColor;opacity:.9;flex:0 0 auto}
+
+    .card{position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:22px;background:var(--card);box-shadow:var(--shadow);backdrop-filter:blur(10px)}
+    .card::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:conic-gradient(from var(--angle,0deg), var(--accent), transparent, var(--brand), transparent, var(--accent));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.35;pointer-events:none}
+    @property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+    .card:hover{--angle: 360deg; transition: --angle 2.2s linear}
+    .chip{display:inline-block;padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:color-mix(in oklab, var(--surface) 82%, transparent);font-size:12px}
+    .muted{color:var(--muted)}
+
+    main section{scroll-margin-top:92px}
+    h2.section{font-size:26px;letter-spacing:.3px;margin:34px 0 16px}
+    .grid{display:grid;gap:18px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+    /* Hero */
+    .hero{display:grid;place-items:center;min-height:78vh;text-align:center;padding:72px 0;position:relative}
+    .hero h1{font-size:clamp(48px,9vw,96px);line-height:1.02;margin:0 0 12px;font-weight:550;font-variation-settings:'wght' 550}
+    .roles{font-size:clamp(18px,2.5vw,26px);color:var(--muted);font-weight:800}
+    .intro{max-width:980px;margin:10px auto 0;font-size:clamp(14px,2.2vw,18px)}
+
+    /* About with photo */
+    #about .about-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+    .avatar{width:100%;aspect-ratio:1/1;border-radius:18px;object-fit:cover;border:1px solid var(--line);box-shadow:var(--shadow)}
+
+    /* Journey timeline */
+    .journey{background:linear-gradient(180deg, transparent, rgba(139,124,255,.10) 40%, rgba(34,211,238,.10));border-radius:var(--radius)}
+    .timeline{position:relative}
+    .timeline:before{content:"";position:absolute;left:50%;top:0;bottom:0;transform:translateX(-50%);width:2px;background:linear-gradient(var(--brand),var(--accent));opacity:.6}
+    .trow{display:grid;grid-template-columns:1fr 1fr;align-items:center;margin:24px 0}
+    .trow .tcontent{position:relative}
+    .trow.left .tcontent{grid-column:1}
+    .trow.right .tcontent{grid-column:2}
+    .tmeta{position:absolute;top:-18px;display:flex;align-items:center;gap:10px}
+    .trow.left .tmeta{right:-18px}
+    .trow.right .tmeta{left:-18px}
+    .tl-node{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:999px;background:radial-gradient(circle at 30% 30%, var(--accent), var(--brand));box-shadow:0 6px 16px rgba(0,0,0,.25);font-size:20px}
+    .year{color:color-mix(in oklab, var(--brand) 78%, white 10%);font-weight:800}
+
+    /* Connect */
+    .connect{text-align:center}
+    .cta-row{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin:28px 0 18px}
+    .subcta-row{display:flex;gap:28px;justify-content:center;flex-wrap:wrap}
+
+    @media(max-width:960px){
+      .grid-2,.grid-3{grid-template-columns:1fr}
+      .timeline:before{left:12px;transform:none}
+      .trow{grid-template-columns:1fr}
+      .trow .tcontent{grid-column:1}
+      .trow .tmeta{left:-6px!important;right:auto}
+      #about .about-wrap{grid-template-columns:1fr}
+    }
+
+    /* Bottom contact bar */
+    .contact-bar{display:flex;flex-direction:column;align-items:center;gap:14px;padding:26px 0 10px;margin-top:12px}
+    .contact-line{display:flex;align-items:center;gap:12px}
+    .contact-line .ico{width:18px;height:18px;fill:currentColor;opacity:.9;flex:0 0 auto}
+    .contact-link{color:var(--ink);font-weight:500;text-decoration:none}
+    .contact-link:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <!-- Background video (replace src with your professional clip, e.g., bg.mp4) -->
+  <div class="bg-video-wrap" aria-hidden="true">
+    <video class="bg-video" id="bgVideo" autoplay muted loop playsinline>
+      <source src="bg2.mp4" type="video/mp4" />
+    </video>
+    <div class="bg-overlay"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="wrap nav">
+      <div class="brand" aria-label="Home"><span class="dot" aria-hidden></span></div>
+      <div class="nav-right">
+        <nav aria-label="Primary" class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#journey">Journey</a>
+          <a href="#experience">Experience</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#connect">Connect</a>
+        </nav>
+        <button id="themeBtn" class="icon-btn" aria-label="Toggle theme">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <!-- HOME -->
+    <section id="home" class="hero">
+      <div>
+        <h1>Priteesh Karra</h1>
+        <div class="roles">AI Researcher · CS Undergrad @ University of North Texas</div>
+        <p class="muted intro">Building and evaluating AI systems—from NLP and LLMs to RAG and backend ML infrastructure—while seeking Summer 2026 roles in AI Engineering, Applied AI Research, and ML Infrastructure.</p>
+        <div style="margin-top:18px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <a class="btn primary" href="#projects">View Projects</a>
+          <a class="btn ghost" href="#about">About Me</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="card" style="margin-top:20px; padding-top:18px;">
+  <h2 class="section" style="margin-top:0; margin-bottom:12px;">About Me</h2>
+  <div class="about-wrap" style="align-items:flex-start;">
+        <div>
+          <p>I’m Priteesh, a Computer Science undergraduate at the University of North Texas, graduating in 2026 on an accelerated three-year track with a 4.0 GPA. Along the way, I’ve been honored with multiple awards and scholarships—including College of Engineering Scholarships and the NSLS Dream Grant—which reflect both academic excellence and community impact.</p>
+          <p>My passion lies in applied AI research, where I’ve explored areas such as NLP, Machine Learning, LLMs, RAG, MCP, adversarial robustness, and distractor ranking. Beyond research, I’ve contributed as a teacher at iGebra.ai, guiding students in coding and AI fundamentals, and as a Resident Life Advisor, supporting and mentoring peers through campus life.</p>
+          <p>I stay active in the community as a member of UNT’s CSE Clubs, NSLS (UNT Chapter), ASEI Dallas Chapter, Google Developer Student Club Dallas, Bakti Yoga Club, and the Asian Student Association. These affiliations have given me opportunities to collaborate across disciplines, lead initiatives, and grow beyond academics.</p>
+          <p>I am seeking Summer 2026 opportunities as an AI Engineer, NLP/Applied AI Research Intern, Backend Engineer, or Machine Learning/Data Science Intern.</p>
+          <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
+            <span class="chip">Graduating 2026 (3-year track)</span>
+            <span class="chip">Applied AI Research</span>
+            <span class="chip">LLMs & RAG</span>
+            <span class="chip">NLP Robustness</span>
+          </div>
+        </div>
+        <div>
+          <img src="priteesh.jpg" alt="Priteesh Karra" class="avatar" />
+        </div>
+      </div>
+    </section>
+
+    <!-- JOURNEY -->
+    <section id="journey" class="journey">
+      <h2 class="section">My Journey</h2>
+      <div class="timeline">
+        <div class="trow left">
+          <div class="tcontent card">
+            <div class="tmeta"><span class="tl-node">🛡️</span><span class="year">2024–2026</span></div>
+            <strong>Resident Life Advisor (RLA)</strong>
+            <div class="muted">As a Resident Life Advisor at UNT, I provide on-call support for over 400+ residents, responding to emergencies, incidents, and wellbeing concerns. Beyond crisis management, I mentor students, mediate conflicts, and organize community events to foster an inclusive and supportive living environment.</div>
+          </div>
+        </div>
+        <div class="trow right">
+          <div class="tcontent card">
+            <div class="tmeta"><span class="tl-node">🛠️</span><span class="year">2024-2026</span></div>
+            <strong>Student Assistant — Help Desk Support</strong>
+            <div class="muted">As a Student Assistant in Help Desk Support, I resolved technical support tickets, provided on-call assistance to students and faculty, and maintained accurate data and records. I also performed system checks and analysis to ensure operational reliability, while contributing to reporting and process improvements.</div>
+          </div>
+        </div>
+        <div class="trow left">
+          <div class="tcontent card">
+            <div class="tmeta"><span class="tl-node">🧪</span><span class="year">2025–Present</span></div>
+            <strong>Undergrad Researcher — Prof. Sagnik Ray Choudhury (NLP)</strong>
+            <div class="muted">
+              As an Undergraduate Researcher, I worked on NLP robustness and LLM evaluation. My projects ranged from adversarial perturbations on transformers to current research on distractor ranking and reasoning reliability in LLMs. I design benchmarks, run large-scale evaluations on datasets like GSM8K and MMLU, and build frameworks to probe generalization and logical consistency.
+            </div>
+          </div>
+        </div>
+        <div class="trow right">
+          <div class="tcontent card">
+            <div class="tmeta"><span class="tl-node">🎓</span><span class="year">2026</span></div>
+            <strong>Graduation — B.S. in Computer Science</strong>
+            <div class="muted">University of North Texas — accelerated 3-year completion; focus on AI/ML and robust NLP.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <h2 class="section">Professional Experience</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Resident Life Advisor <span class="muted">(2024 – Ongoing · Denton, TX)</span></h3>
+          <ul>
+            <li>Handled on-call rotations and emergency response; de-escalated conflicts to maintain community standards.</li>
+            <li>Coordinated events and communications for 50+ residents; improved engagement and compliance.</li>
+            <li>Maintained accurate incident/interaction documentation; collaborated with campus staff for resolution.</li>
+          </ul>
+          <div class="muted">Crisis Management · Communication · Leadership</div>
+        </article>
+        <article class="card">
+          <h3>Student Assistant — Help Desk Support <span class="muted">(2024 - Ongoing · Denton, TX)</span></h3>
+          <ul>
+            <li>Resolved support tickets and performed root-cause analysis for recurring issues.</li>
+            <li>Managed data/records and built lightweight analyses to inform process improvements.</li>
+            <li>Authored runbooks and templates to standardize responses and tracking.</li>
+          </ul>
+          <div class="muted">Troubleshooting · Data Management · Documentation</div>
+        </article>
+        <article class="card">
+          <h3>Undergraduate Researcher — Prof. Sagnik Ray Choudhury <span class="muted">(2025 - Ongoing)</span></h3>
+          <ul>
+            <li>Benchmarked LLM reasoning on GSM8K/MMLU; designed evaluation frameworks for consistency and reliability.</li>
+            <li>Generated adversarial examples with TextAttack; measured robustness of chain-of-thought prompting.</li>
+            <li>Prepared experimental results and writing for an in-progress publication.</li>
+          </ul>
+          <div class="muted">LLMs · Robustness · Evaluation</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <h2 class="section">Core Expertise</h2>
+      <div class="grid grid-3">
+        <div class="card skill-card"><div class="skill-head"><span class="skill-icon">🤖</span><strong>AI & ML</strong></div><div class="muted">PyTorch, scikit-learn, Transformers, LangChain, RAG, Prompt/CoT, OpenAI API</div></div>
+        <div class="card skill-card"><div class="skill-head"><span class="skill-icon">🧪</span><strong>NLP Robustness</strong></div><div class="muted">TextAttack, adversarial training, evaluation frameworks, GSM8K/MMLU</div></div>
+        <div class="card skill-card"><div class="skill-head"><span class="skill-icon">⚙️</span><strong>Backend & Infra</strong></div><div class="muted">Python (FastAPI), Node.js, REST, PostgreSQL, Redis, Docker, CI/CD</div></div>
+        <div class="card skill-card"><div class="skill-head"><span class="skill-icon">☁️</span><strong>Cloud</strong></div><div class="muted">AWS/Azure/GCP (fundamentals), Linux, GitHub Actions</div></div>
+        <div class="card skill-card"><div class="skill-head"><span class="skill-icon">📊</span><strong>Data</strong></div><div class="muted">Pandas, NumPy, Matplotlib, data pipelines</div></div>
+        <div class="card skill-card"><div class="skill-head"><span class="skill-icon">🔐</span><strong>Security</strong></div><div class="muted">Secure coding, auth (JWT), rate limiting</div></div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2 class="section">Featured Projects</h2>
+      <div class="grid grid-3">
+        <article class="card">
+          <h3>AI‑Wardrobe (MYRA)</h3>
+          <p class="muted">Mobile app recommending outfits based on weather, events, and preferences; avatar try‑ons.</p>
+          <ul>
+            <li>Clothing scanning and tagging; personalized suggestions with feedback loops.</li>
+            <li>Weather & calendar integration; bitmoji‑style avatar previews.</li>
+            <li>RAG/LLM layer for explanations and styling tips.</li>
+          </ul>
+          <div class="muted">React Native · Python/FastAPI · Firebase/PostgreSQL · LLM/RAG</div>
+        </article>
+
+        <article class="card">
+          <h3>Adversarial Perturbations of LLMs — Research</h3>
+          <p class="muted">Evaluating reasoning robustness under subtle textual changes; CoT sensitivity analyses.</p>
+          <ul>
+            <li>GSM8K/MMLU benchmarking; distractor ranking to probe reasoning failure modes.</li>
+            <li>Synonym/paraphrase attacks with TextAttack; logic/temporal/spatial inference stress tests.</li>
+            <li>Framework for consistency, reliability, and generalization scoring.</li>
+          </ul>
+          <div class="muted">Transformers · TextAttack · Evaluation Frameworks</div>
+        </article>
+
+        <article class="card">
+          <h3>Racial Classification on UTKFace</h3>
+          <p class="muted">CNN classification with data augmentation and fairness/error analysis.</p>
+          <ul>
+            <li>Custom CNN and transfer learning baselines; calibrated probabilities.</li>
+            <li>Bias and confusion analysis; recommendations for dataset balance.</li>
+            <li>Performed fairness and bias analysis, identifying disparities in classification accuracy across demographic groups.</li>
+            <li>Applied probability calibration (Platt scaling/temperature scaling) to improve reliability of predictions.</li>
+          </ul>
+          <div class="muted">PyTorch · CNN · Ethics/Fairness</div>
+        </article>
+
+        <article class="card">
+          <h3>Predictive Analytics for Stock Markets</h3>
+          <p class="muted">Feature‑engineered pipelines and time‑series models for price/volatility signals.</p>
+          <ul>
+            <li>Alpha feature set (momentum, RSI, volume/volatility signals) with rolling validation.</li>
+            <li>Backtests with risk metrics; careful train/test split to avoid leakage.</li>
+            <li>Built feature-engineered pipelines and time-series models with alpha signals (momentum, RSI, volatility), performing rolling validation and backtests with risk metrics while preventing data leakage.</li>
+          </ul>
+          <div class="muted">Python · pandas · scikit‑learn · Backtesting</div>
+        </article>
+
+        <article class="card">
+          <h3>Dallas City Simulation Developer – Urban Growth and Environmental Impact (C++)</h3>
+          <p class="muted">Simulation software inspired by SimCity, modeling realistic urban growth and environmental trade-offs.</p>
+          <ul>
+            <li>Designed algorithms for urban zoning (residential, commercial, industrial) and population-driven expansion.</li>
+            <li>Implemented dynamic pollution monitoring to visualize environmental impact of planning decisions.</li>
+            <li>Integrated real-time visualization of growth, resources, and sustainability trade-offs.</li>
+            
+          </ul>
+          <div class="muted">C++ · Algorithms · Simulation · Visualization</div>
+        </article>
+
+        <article class="card">
+          <h3>Banking System Application – Financial Management Simulator (C++)</h3>
+          <p class="muted">Object-oriented banking software replicating real-world account operations with secure file handling.</p>
+          <ul>
+            <li>Implemented account management for savings/checking with real-time balance updates.</li>
+            <li>Built deposit, withdrawal, and total balance calculation features with accurate tracking.</li>
+            <li>Developed file-based transaction history for logging and future account audits.</li>
+
+          </ul>
+          <div class="muted">C++ · OOP · File Handling · CLI</div>
+          </article>
+
+      </div>
+    </section>
+
+    <!-- CONNECT -->
+    <section id="connect" class="connect card">
+      <h2 class="section" style="margin-top:0;font-size:36px">Let's Connect</h2>
+      <p class="muted" style="max-width:760px;margin:0 auto 18px">Interested in AI/LLM/RAG or research collaborations? I’m open to internships for Summer 2026 and technical discussions.</p>
+
+      <div class="subcta-row">
+        <a class="btn ghost icon" href="https://www.linkedin.com/in/priteeshkarra/" target="_blank" rel="noopener">LinkedIn
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4V8.5zm7 0h3.83v1.98h.05C12 9.02 13.7 8 15.93 8 20.1 8 21 10.76 21 14.62V23h-4v-7.37c0-1.76-.03-4.02-2.45-4.02-2.46 0-2.84 1.92-2.84 3.9V23h-4V8.5z"/></svg>
+        </a>
+        <a class="btn ghost" href="Priteesh_Karra.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="btn ghost icon" href="https://github.com/priteesshhh" target="_blank" rel="noopener">GitHub
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.08 3.29 9.38 7.86 10.9.58.1.79-.25.79-.56v-1.98c-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.26 3.4.96.11-.76.41-1.26.74-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.28 1.2-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.75.81 1.2 1.83 1.2 3.09 0 4.43-2.69 5.4-5.26 5.69.42.36.79 1.07.79 2.17v3.22c0 .31.2.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+        </a>
+      </div>
+
+      <p class="muted" style="margin-top:18px;font-size:13px">Email works best; happy to share more details on request.</p>
+    </section>
+
+    <section class="contact-bar" aria-label="Contact">
+      <div class="contact-line">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5L4 8V6l8 5 8-5v2z"/></svg>
+        <a class="contact-link" href="mailto:WritetoPriteesh@gmail.com">WritetoPriteesh@gmail.com</a>
+      </div>
+    </section>
+
+    <footer style="text-align:center;color:var(--muted);font-size:13px;margin-top:24px">© <span id="year"></span> · Priteesh Karra · </footer>
+  </main>
+
+  <script>
+    // ----- Theme toggle (dark by default; remembers choice) -----
+    const root=document.documentElement, KEY='pk_theme';
+    const saved=localStorage.getItem(KEY);
+    if(saved){ root.classList.toggle('light', saved==='light'); root.classList.toggle('dark', saved==='dark'); }
+    document.getElementById('themeBtn').addEventListener('click',()=>{
+      const next=root.classList.contains('light')?'dark':'light';
+      root.classList.toggle('light', next==='light');
+      root.classList.toggle('dark', next==='dark');
+      localStorage.setItem(KEY,next);
+      try{ const v=document.getElementById('bgVideo'); v && v.play && v.play(); }catch(e){}
+    });
+
+    // ----- Scroll spy -----
+    const links=[...document.querySelectorAll('.nav-links a')];
+    const byHash=new Map(links.map(a=>[a.getAttribute('href'),a]));
+    function setActive(hash){ links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===hash)); }
+    links.forEach(a=> a.addEventListener('click',()=> setActive(a.getAttribute('href')) ));
+    window.addEventListener('hashchange',()=> setActive(location.hash || '#home'));
+    const spy=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ const hash='#'+e.target.id; if(byHash.get(hash)) setActive(hash); } });
+    },{ rootMargin:'-30% 0px -55% 0px', threshold:[0,0.25,0.5] });
+    document.querySelectorAll('main section').forEach(sec=>spy.observe(sec));
+    setActive(location.hash || '#home');
+
+    // Footer year
+    document.getElementById('year').textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
